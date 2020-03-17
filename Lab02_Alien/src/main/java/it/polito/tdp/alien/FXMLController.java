@@ -6,8 +6,12 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 public class FXMLController {
+	
+	AlienDictionary ad=new AlienDictionary();
 
     @FXML
     private ResourceBundle resources;
@@ -20,16 +24,28 @@ public class FXMLController {
     
     @FXML
     private Button btnReset;
+    @FXML
+    private TextField txtTranslate;
+    @FXML
+    private TextArea txtArea;
 
     @FXML
     void doTranslate(ActionEvent event) {
-    	// TODO - add the button and complete this    	
+    	String text=txtTranslate.getText().toLowerCase();
+    	
+    	if (text.contains(" ")) {
+    		String array[]=text.split(" ");
+    		ad.addWord(new Word(array[0],array[1]));
+    	}
+    	else {
+    		txtArea.setText(ad.translateWord(text));
+    	}
     }
     
     
     @FXML
     void doReset(ActionEvent event) {
-    	// TODO - add the button and complete this 
+    	txtArea.setText(""); 
     }
     
     
