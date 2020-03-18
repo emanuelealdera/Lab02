@@ -35,7 +35,8 @@ public class FXMLController {
     	
     	if (text.contains(" ")) {
     		String array[]=text.split(" ");
-    		ad.addWord(new Word(array[0],array[1]));
+    		ad.addWord(array[0],array[1]);
+    		txtArea.setText("");
     	}
     	else {
     		txtArea.setText(ad.translateWord(text));

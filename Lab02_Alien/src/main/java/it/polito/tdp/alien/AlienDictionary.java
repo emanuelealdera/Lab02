@@ -4,28 +4,41 @@ import java.util.*;
 
 public class AlienDictionary {
 	
-	List <Word> words;
+	List <WordEnhanced> words;
 	
 	public AlienDictionary() {
 		words=new ArrayList<> ();
 	}
 	
-	public void addWord (Word w) {
-		if (words.contains(w) == false)
-		    this.words.add(w);
-		else {
-			words.remove(w);
-			words.add(w);
+	public void addWord (String alienWord, String translation) {
+		
+		if (alienWordPresent(alienWord)==false) {
+			words.add(new WordEnhanced (alienWord,translation) );
 		}
-			 
+		
+		for (WordEnhanced we:words) {
+			if (alienWord.equals(we.getAlienWord())) {
+				if (we.getTranslation().contains(translation)==false)
+					we.setTranslation(translation);
+			}		 
+		}
+		
 	}
 	
 	public String translateWord (String alienWord) {
-		for (Word w:words) {
+		for (WordEnhanced w:words) {
 			if (w.getAlienWord().equals(alienWord))
-				return w.getTranslation();
+				return w.translationsToString();
 		}
 		return null;
+	}
+	
+	public boolean alienWordPresent(String alienWord) {
+		for (WordEnhanced w:words) {
+			if (w.getAlienWord().equals(alienWord))
+				return true;
+		}
+		return false;
 	}
 
 }
